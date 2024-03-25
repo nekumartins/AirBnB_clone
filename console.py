@@ -2,12 +2,12 @@
 
 import cmd
 from models import storage
-from models.base_model import BaseModel
+from models.base_model import BaseModel, User
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    classes = ["BaseModel"]
+    classes = ["BaseModel", "User"]
 
     def do_create(self, args):
         """Creates a new instance of BaseModel,

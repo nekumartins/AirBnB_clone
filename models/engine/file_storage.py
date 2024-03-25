@@ -1,7 +1,7 @@
 #!usr/bin/python3
 import json
 import os
-from models.base_model import BaseModel
+from models.base_model import BaseModel, User
 
 
 class FileStorage:
@@ -23,10 +23,14 @@ class FileStorage:
             json.dump(objects, f)
 
     def reload(self):
-        if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r') as f:
+        try:
+            with open(self.__file_path, 'r') as f:
                 objs = json.load(f)
             for obj in objs.values():
                 cls = obj['__class__']
-                if cls == 'BaseModel':
+                if cls == 'User':
+                    self.new(User(**obj))
+                elif cls == 'BaseModel':
                     self.new(BaseModel(**obj))
+        except FileNotFoundError:
+            pass
