@@ -1,4 +1,5 @@
 #!usr/bin/python3
+"""Task 6"""
 
 import cmd
 from models import storage
